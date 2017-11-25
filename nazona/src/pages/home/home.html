@@ -1,17 +1,41 @@
+<!-- Cabecera de la aplicación -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+  <ion-toolbar color="primary">
+    <!--<ion-buttons start>
+      <button ion-button icon-only (click)="toggleView()">
+        <ion-icon name="map"></ion-icon>
+      </button>
+    </ion-buttons>-->
+
+    <ion-title text-center>Nazona</ion-title>
+
+  </ion-toolbar>
 </ion-header>
 
+<!-- Contenido de la aplicación -->
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-grid text-center>
+    <ion-list> <!-- formulario de búsqueda -->
+      <ion-row>
+        <ion-item>
+          <ion-label>Qué buscas</ion-label>
+            <ion-input type="search"></ion-input>
+        </ion-item>
+      </ion-row>
+    </ion-list>
+    <ion-row id="mapView" *ngIf="isMapActive()">
+      <ion-col>
+        <h2>MapView</h2>
+        <div style="height: 180px" id="map">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<!-- Footer de la aplicación -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-title text-center>Información de contacto</ion-title>
+  </ion-toolbar>
+</ion-footer>
