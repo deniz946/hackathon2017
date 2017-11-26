@@ -16,7 +16,8 @@ import { AppComponent } from './app.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import {SelectButtonModule} from 'primeng/primeng';
-import { AlertModule } from 'ngx-bootstrap';
+import { AlertModule } from 'ngx-bootstrap/alert';
+
 
 
 

@@ -28,7 +28,9 @@ export class AppComponent {
   };
   nationalities = null;
   n_results: number = -1;
+  markers = new Array();
   private _map;
+  loading:boolean = false;
 
   constructor(private nationalityService: NationalityService, private http: HttpClient) {
 
@@ -82,32 +84,21 @@ export class AppComponent {
   * Inicializamos los datos del mapa cuando están listos
   */
   onMapReady($event) {
-    //SetCenter here
-
-    //Marcador de prueba
-    let marker = L.marker(this.location, {
-      icon: L.icon({
-        iconSize: [50, 50],
-        iconAnchor: [1, 1],
-        iconUrl: 'assets/marker-image.png',
-        shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
-      })
-    });
-    marker.addTo($event)
-      .bindPopup('Información sobre el lugar')
-    marker.bindTooltip("Nombre de referencia");
     this._map = $event;
   }
 
   search(nat, type) {
+    this.loading = true;
     console.log(nat);
     console.log(type);
     if (nat && type) {
       this.http.get('http://localhost:3000/search', { params: { type: type, nat: nat } }).subscribe(data => {
         this.n_results = data.results.length;
         data.results.forEach(item => {
+          this.removeMarkers();
           this.addMarker(item);
         });
+        this.loading = false;
       });
     }
   }
@@ -124,6 +115,13 @@ export class AppComponent {
     marker.addTo(this._map)
       .bindPopup(item.name)
     marker.bindTooltip(item.name);
+    this.markers.push(marker);
+  }
+
+  removeMarkers(){
+    for(let i=0;i<this.markers.length;i++) {
+      this._map.removeLayer(this.markers[i]);
+    }  
   }
 
 }

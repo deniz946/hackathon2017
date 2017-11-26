@@ -1,87 +1,136 @@
 <header>
     <nav class="navbar">
         <div class="navbar-header">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3"><img class="navbar-brand" src="assets/logo.png"><img></div>
-            <div class="col-md-3">
-                <span class="sloganSpan">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3"><img class="navbar-brand" src="assets/logo.png"><img></div>
+                <div class="col-md-3">
+                    <span class="sloganSpan">
                     Análisis demográfico por nacionalidades
                 </span>
+                </div>
+                <div class="col-md-3"></div>
             </div>
-            <div class="col-md-3"></div>
-        </div>
-        
+
         </div>
         <!--<ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>-->
-  </nav>
+    </nav>
 </header>
 <div class="" id="mainWrapper">
+    <div class="container">
+        <div class="jumbotron" style="text-align: justify">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget dolor volutpat, finibus nibh id, vulputate lacus. Etiam tincidunt, nibh at iaculis scelerisque, elit velit venenatis augue.</p>
+        </div>
+    </div>
     <div id="configWrapper">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-3">
-            <select [(ngModel)]="natio" class="form-control">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <select [(ngModel)]="natio" class="form-control">
                 <option *ngFor="let nat of nationalities; let i = index" [value]="nat.name" [attr.selected]="i==0">
                 {{nat.name}}
                 </option>
             </select>
-        </div>
-        <div class="col-md-3"> <!-- percentSlider -->
-            <div class="row" id="percentSliderWrapper">
-                <input type="range" min="0" max="100" value="15" class="slider col-md-8" id="percentSlider">
-                <small class="sliderLabel col-md-4">(0-5%)</small>
             </div>
+            <div class="col-md-3">
+                <!-- percentSlider -->
+                <div id="percentSliderWrapper">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="percentSlider">
+                </div>
+            </div>
+            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-3">
-            <select id="countrySelect" [(ngModel)]="type" class="form-control">
-                <option selected value="null">Categorías</option>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <select id="countrySelect" [(ngModel)]="type" class="form-control">
+                <option selected="true" value="null">Categorías</option>
                 <option value="restaurante">Restaurante</option>
                 <option value="centro comercial">Centro comercial</option>
                 <option value="pub">Pub</option>
             </select>
-        </div>
-        <div class="col-md-3"> <!-- ageSlider -->
-            <div class="row" id="ageSliderWrapper">
-                <input type="range" min="1" max="100" value="15" class="slider col-md-8" id="ageSlider">
-                <small class="sliderLabel col-md-4">(0-5 años)</small>
             </div>
+            <div class="col-md-3">
+                <!-- ageSlider -->
+                <div id="ageSliderWrapper">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="ageSlider">
+                </div>
+            </div>
+            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3"></div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <br>
+                <button id="searchBtn" class="btn btn-success" (click)="search(natio, type)" [disabled]="!type || !natio || loading">{{loading === true ? "Buscando..." : "Buscar"}}</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div><br/>
+        <div class="row" *ngIf="isNResultsVisible()">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <alert type="info">
+                    Se han encontrado {{n_results}} resultado/s!
+                </alert>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     </div>
-     <div class="row">
-        <div class="col-md-4"></div>
-      <div class="col-md-4">
-            <br>
-            <button id="searchBtn" class="btn btn-success" (click)="search(natio, type)" [disabled]="(!type && type != null)|| !natio">Buscar</button>            
-        </div>
-        <div class="col-md-4"></div>
-    </div><br/>
-    <div class="row" *ngIf="isNResultsVisible()">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-center">
-            <small>({{n_results}} resultados)</small>
-        </div>
-        <div class="col-md-4"></div>
-    </div>
-</div>
     <br><br>
     <div class="container" id="mapWrapper">
-        <div style="height: 500px;"
-            leaflet 
-            [leafletOptions]="options"
-            [leafletLayers]="layers"
-            (leafletMapReady)="onMapReady($event)">
+        <div style="height: 500px;" leaflet [leafletOptions]="options" [leafletLayers]="layers" (leafletMapReady)="onMapReady($event)">
+</div>
+</div>
+</div>
+<!--<footer class="container-fluid text-center">
+    <p>Información de contacto</p>
+</footer>-->
+
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 widget">
+                <h2>Article</h2>
+                <article class="widget_content">
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit</li>
+                        <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</li>
+                        <li>Sed ut perspiciatis unde omnis iste natus error sit voluptatem</li>
+                        <li>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae </li>
+                        <li>Nemo enim ipsam voluptatem quia voluptas sit aspernatur</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="col-md-3 widget">
+                <h2>Link</h2>
+                <article class="widget_content">
+                    <ul>
+                        <li>Bootsnipp</li>
+                        <li>Get Bootstrap</li>
+                        <li>My BLog</li>
+                        <li>Facebook</li>
+                        <li>Follow me</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="col-md-4 widget">
+                <img src="http://localhost:4200/assets/logo.png" alt="" width="300px" height="150px">
+                <article class="widget_content">
+                    <p>Jl. Lingkar Selatan, Kasihan, Bantul<br> Yogyakarta Indonesia 55183<br>Phone: +62 274 387656</p>
+                </article>
+            </div>
         </div>
     </div>
 </div>
-<footer class="container-fluid text-center">
-    <p>Información de contacto</p>
-</footer>
+<div class="footer-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 widget">Hackathon 2017 | Nazona <span class="pull-right">nazonapp@gmail.com »</span>
+            </div>
+        </div>
+    </div>
+</div>
