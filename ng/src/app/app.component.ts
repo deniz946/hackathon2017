@@ -12,8 +12,7 @@ import { URLSearchParams } from '@angular/http';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent
-{
+export class AppComponent {
   location = [37.9892407, -0.7125763];
   select;
   params: URLSearchParams = new URLSearchParams();
@@ -29,6 +28,7 @@ export class AppComponent
   };
   nationalities = null;
   n_results: number = -1;
+  private _map;
 
   constructor(private nationalityService: NationalityService, private http: HttpClient) {
 
@@ -67,14 +67,14 @@ export class AppComponent
   /*
   * Comprueba si tiene que mostrar el número de resultados
   */
-  isNResultsVisible(){
+  isNResultsVisible() {
     return (this.n_results != -1)
   }
 
   /*
   * UpdateResults
   */
-  updateMap(){
+  updateMap() {
     this.n_results = 0;
   }
 
@@ -95,17 +95,35 @@ export class AppComponent
     });
     marker.addTo($event)
       .bindPopup('Información sobre el lugar')
-      marker.bindTooltip("Nombre de referencia");
-  }  
+    marker.bindTooltip("Nombre de referencia");
+    this._map = $event;
+  }
 
   search(nat, type) {
     console.log(nat);
     console.log(type);
     if (nat && type) {
-      this.http.get('http://localhost:3000/search', {params: {type: type, nat: nat}}).subscribe(data => {
+      this.http.get('http://localhost:3000/search', { params: { type: type, nat: nat } }).subscribe(data => {
         this.n_results = data.results.length;
+        data.results.forEach(item => {
+          this.addMarker(item);
+        });
       });
     }
+  }
+
+  addMarker(item) {
+    let marker = L.marker([item.geometry.location.lat, item.geometry.location.lng], {
+      icon: L.icon({
+        iconSize: [50, 50],
+        iconAnchor: [1, 1],
+        iconUrl: 'assets/marker-image.png',
+        shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
+      })
+    });
+    marker.addTo(this._map)
+      .bindPopup(item.name)
+    marker.bindTooltip(item.name);
   }
 
 }

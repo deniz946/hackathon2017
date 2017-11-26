@@ -24,7 +24,6 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-3">
-            <pre>{{natio|json}}</pre>
             <select [(ngModel)]="natio" class="form-control">
                 <option *ngFor="let nat of nationalities; let i = index" [value]="nat.name" [attr.selected]="i==0">
                 {{nat.name}}
