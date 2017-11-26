@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   location = [37.9892407, -0.7125763];
+  center = [37.9892407, -0.7125763];
   title = 'Nazona';
   options = {
       layers: [
@@ -20,16 +21,22 @@ export class AppComponent {
       center: [0, 0],
       zoom: 13,
     };
-  center;
+  nationalities = null;
+
+  constructor(private nationalityService: NationalityService, private http: HttpClient) {
+    
+  }
 
   /*
   * Cuando se inicializa el componente de la aplicación
   */
-  ngOnInit(){
+  ngOnInit()
+  {
+    //Comprobamos si la geolocalización está disponible
     if(navigator.geolocation)
     {
        navigator.geolocation.getCurrentPosition(position => {
-         this.location = position.coords;
+         this.location = [position.coords.latitude, position.coords.longitude];
          console.log(position.coords); 
        });
     }
@@ -43,6 +50,13 @@ export class AppComponent {
 
     //Configuramos las opciones del mapa
     this.options.center = this.center;
+
+    // this.getNationalities()
+    this.http.get('https://restcountries.eu/rest/v2/all').subscribe(data => {
+      // Read the result field from the JSON response.
+      console.log(data);
+      this.nationalities = data;
+    });
   }
 
   /*
@@ -61,22 +75,8 @@ export class AppComponent {
       })});
       marker.addTo($event)
       .bindPopup('Información sobre el lugar')
-      marker.bindTooltip("my tooltip text").openTooltip();
-  }
-  public nationalities;
-
-  constructor(private nationalityService: NationalityService, private http: HttpClient) {
-    
-  }
-
-  ngOnInit() {
-    // this.getNationalities()
-    this.http.get('https://restcountries.eu/rest/v2/all').subscribe(data => {
-      // Read the result field from the JSON response.
-      console.log(data);
-      this.nationalities = data;
-    });
-  }
+      marker.bindTooltip("my tooltip text");
+  }  
 
   // getNationalities() {
   //   this.nationalityService.get()
