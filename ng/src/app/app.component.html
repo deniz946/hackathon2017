@@ -51,6 +51,13 @@
             <button id="searchBtn" class="btn btn-success">Buscar</button>            
         </div>
         <div class="col-md-4"></div>
+    </div><br/>
+    <div class="row" *ngIf="isNResultsVisible()">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <small>({{n_results}})</small>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
     <br><br>

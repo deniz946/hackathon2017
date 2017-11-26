@@ -10,7 +10,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+
+export class AppComponent
+{
   location = [37.9892407, -0.7125763];
   center = [37.9892407, -0.7125763];
   title = 'Nazona';
@@ -22,6 +24,7 @@ export class AppComponent {
       zoom: 13,
     };
   nationalities = null;
+  n_results: number = -1;
 
   constructor(private nationalityService: NationalityService, private http: HttpClient) {
     
@@ -60,6 +63,20 @@ export class AppComponent {
   }
 
   /*
+  * Comprueba si tiene que mostrar el número de resultados
+  */
+  isNResultsVisible(){
+    return (this.n_results != -1)
+  }
+
+  /*
+  * UpdateResults
+  */
+  updateMap(){
+    this.n_results = 0;
+  }
+
+  /*
   * Inicializamos los datos del mapa cuando están listos
   */
   onMapReady($event){
@@ -75,7 +92,7 @@ export class AppComponent {
       })});
       marker.addTo($event)
       .bindPopup('Información sobre el lugar')
-      marker.bindTooltip("my tooltip text");
+      marker.bindTooltip("Nombre de referencia");
   }  
 
   // getNationalities() {
