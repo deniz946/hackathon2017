@@ -10,32 +10,34 @@
   </nav>
 </header>
 <div class="" id="mainWrapper">
-    <div id="configWrapper" class="row text-center">
-        <div class="col-md-4">
-            <select id="countrySelect" class="custom-select">
-                    <option selected>Nacionalidades</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
-              </div>
-            </div>
-        <div class="col-md-4">
-            <select id="countrySelect" class="custom-select">
-                    <option selected>Categorías</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <select [(ngModel)]="select" class="form-control">
+                <option *ngFor="let nat of nationalities; let i = index" [value]="nat.name">
+                {{nat.name}}
+                </option>
             </select>
         </div>
     </div>
+    <br>
+    <div class="row">
+      <div class="col-md-2 col-md-offset-5">
+          
+            <select id="countrySelect" class="form-control">
+                    <option selected>Categorías</option>
+                    <option value="rest">Restaurante</option>
+                    <option value="cc">Centro comercial</option>
+                    <option value="pub">Pub</option>
+            </select>
+        </div>
+    </div>
+     <div class="row">
+      <div class="col-md-1 col-md-offset-5">
+            <br>
+            <button class="btn btn-success">Buscar</button>            
+        </div>
+    </div>
+    <br>
     <div class="container" id="mapWrapper">
         <div style="height: 500px;"
             leaflet 

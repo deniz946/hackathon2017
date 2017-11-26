@@ -1,6 +1,9 @@
+import { NationalityService } from './services/nationality.service';
 import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import { Map } from 'leaflet';
+import { OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -60,4 +63,24 @@ export class AppComponent {
       .bindPopup('Información sobre el lugar')
       marker.bindTooltip("my tooltip text").openTooltip();
   }
+  public nationalities;
+
+  constructor(private nationalityService: NationalityService, private http: HttpClient) {
+    
+  }
+
+  ngOnInit() {
+    // this.getNationalities()
+    this.http.get('https://restcountries.eu/rest/v2/all').subscribe(data => {
+      // Read the result field from the JSON response.
+      console.log(data);
+      this.nationalities = data;
+    });
+  }
+
+  // getNationalities() {
+  //   this.nationalityService.get()
+  //   .subscribe(nats => this.nationalities);
+  // }
+
 }
