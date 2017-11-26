@@ -31,8 +31,9 @@
             </select>
         </div>
         <div class="col-md-3"> <!-- percentSlider -->
-            <div id="percentSliderWrapper">
-                <input type="range" min="1" max="100" value="50" class="slider" id="percentSlider">
+            <div class="row" id="percentSliderWrapper">
+                <input type="range" min="0" max="100" value="15" class="slider col-md-8" id="percentSlider">
+                <small class="sliderLabel col-md-4">(0-5%)</small>
             </div>
         </div>
         <div class="col-md-3"></div>
@@ -48,8 +49,9 @@
             </select>
         </div>
         <div class="col-md-3"> <!-- ageSlider -->
-            <div id="ageSliderWrapper">
-                <input type="range" min="1" max="100" value="50" class="slider" id="ageSlider">
+            <div class="row" id="ageSliderWrapper">
+                <input type="range" min="1" max="100" value="15" class="slider col-md-8" id="ageSlider">
+                <small class="sliderLabel col-md-4">(0-5 años)</small>
             </div>
         </div>
         <div class="col-md-3"></div>
@@ -65,7 +67,7 @@
     <div class="row" *ngIf="isNResultsVisible()">
         <div class="col-md-4"></div>
         <div class="col-md-4 text-center">
-            <small>({{n_results}})</small>
+            <small>({{n_results}} resultados)</small>
         </div>
         <div class="col-md-4"></div>
     </div>

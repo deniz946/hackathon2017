@@ -30,6 +30,18 @@ footer{
     opacity: 80%;
 }
 
+.sliderLabel{
+    height: 50px;
+}
+.slider{
+    height: 50px;
+    width: inherit;
+}
+
+#tickmarks{
+    border: 1px solid black;
+}
+
 #configWrapper{
     padding: 15px 15px 0px 15px;
 }

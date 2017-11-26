@@ -60,7 +60,7 @@ export class AppComponent {
       // Read the result field from the JSON response.
       console.log(data);
       this.nationalities = data;
-      this.select = data[0].name;
+      this.select = data[10].name;
     });
   }
 
