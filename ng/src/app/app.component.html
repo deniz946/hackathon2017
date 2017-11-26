@@ -24,8 +24,9 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-3">
-            <select [(ngModel)]="select" class="form-control">
-                <option *ngFor="let nat of nationalities; let i = index" [value]="nat.name">
+            <pre>{{natio|json}}</pre>
+            <select [(ngModel)]="natio" class="form-control">
+                <option *ngFor="let nat of nationalities; let i = index" [value]="nat.name" [attr.selected]="i==0">
                 {{nat.name}}
                 </option>
             </select>
@@ -40,10 +41,10 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-3">
-            <select id="countrySelect" class="form-control">
-                <option selected>Categorías</option>
-                <option value="rest">Restaurante</option>
-                <option value="cc">Centro comercial</option>
+            <select id="countrySelect" [(ngModel)]="type" class="form-control">
+                <option selected value="null">Categorías</option>
+                <option value="restaurante">Restaurante</option>
+                <option value="centro comercial">Centro comercial</option>
                 <option value="pub">Pub</option>
             </select>
         </div>
@@ -58,7 +59,7 @@
         <div class="col-md-4"></div>
       <div class="col-md-4">
             <br>
-            <button id="searchBtn" class="btn btn-success">Buscar</button>            
+            <button id="searchBtn" class="btn btn-success" (click)="search(natio, type)" [disabled]="(!type && type != null)|| !natio">Buscar</button>            
         </div>
         <div class="col-md-4"></div>
     </div><br/>

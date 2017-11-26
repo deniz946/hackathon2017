@@ -9,9 +9,9 @@ var request = require('request');
 
 /*GET all nationalities page.*/
 router.get('/', function (req, res, next) {
-    const type = req.query.type, nat = req.query.nat;
+    const type = req.query.type, lat = req.query.lat, lng = req.query.lng, nat = req.query.nat ;
     if (type && nat) {
-        request.get({ url: utils.query(type, nat) }, function (err, httpResponse, body) {
+        request.get({ url: utils.query(type, nat, lat, lng) }, function (err, httpResponse, body) {
             res.send(body).status(200);
         });
     }

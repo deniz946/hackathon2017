@@ -4,6 +4,7 @@ import * as L from 'leaflet';
 import { Map } from 'leaflet';
 import { OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { URLSearchParams } from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -14,37 +15,37 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent
 {
   location = [37.9892407, -0.7125763];
+  select;
+  params: URLSearchParams = new URLSearchParams();
   center = [37.9892407, -0.7125763];
+  val = 100;
   title = 'Nazona';
   options = {
-      layers: [
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 })
-      ],
-      center: [0, 0],
-      zoom: 13,
-    };
+    layers: [
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 })
+    ],
+    center: [0, 0],
+    zoom: 13,
+  };
   nationalities = null;
   n_results: number = -1;
 
   constructor(private nationalityService: NationalityService, private http: HttpClient) {
-    
+
   }
 
   /*
   * Cuando se inicializa el componente de la aplicación
   */
-  ngOnInit()
-  {
+  ngOnInit() {
     //Comprobamos si la geolocalización está disponible
-    if(navigator.geolocation)
-    {
-       navigator.geolocation.getCurrentPosition(position => {
-         this.location = [position.coords.latitude, position.coords.longitude];
-         console.log(position.coords); 
-       });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.location = [position.coords.latitude, position.coords.longitude];
+        console.log(position.coords);
+      });
     }
-    else
-    {
+    else {
       this.location = [37.9892407, -0.7125763]; //Posición por defecto en Torrevieja
     }
 
@@ -59,6 +60,7 @@ export class AppComponent
       // Read the result field from the JSON response.
       console.log(data);
       this.nationalities = data;
+      this.select = data[0].name;
     });
   }
 
@@ -79,25 +81,32 @@ export class AppComponent
   /*
   * Inicializamos los datos del mapa cuando están listos
   */
-  onMapReady($event){
+  onMapReady($event) {
     //SetCenter here
 
     //Marcador de prueba
     let marker = L.marker(this.location, {
       icon: L.icon({
-         iconSize: [ 50, 50 ],
-         iconAnchor: [ 1, 1 ],
-         iconUrl: 'assets/marker-image.png',
-         shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
-      })});
-      marker.addTo($event)
+        iconSize: [50, 50],
+        iconAnchor: [1, 1],
+        iconUrl: 'assets/marker-image.png',
+        shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
+      })
+    });
+    marker.addTo($event)
       .bindPopup('Información sobre el lugar')
       marker.bindTooltip("Nombre de referencia");
   }  
 
-  // getNationalities() {
-  //   this.nationalityService.get()
-  //   .subscribe(nats => this.nationalities);
-  // }
+  search(nat, type) {
+    console.log(nat);
+    console.log(type);
+    if (nat && type) {
+      this.http.get('http://localhost:3000/search', {params: {type: type, nat: nat}}).subscribe(data => {
+        // Read the result field from the JSON response.
+        console.log(data);
+      });
+    }
+  }
 
 }

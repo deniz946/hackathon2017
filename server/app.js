@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var allowCrossDomain = require('./config/cors');
 var dbConnect = require('./config/dbConfig');
 
 
@@ -14,6 +15,8 @@ var type = require('./routes/type');
 var search = require('./routes/search');
 
 var app = express();
+
+app.use(allowCrossDomain);
 
 var Nationality = require('./models/Nationality');
 

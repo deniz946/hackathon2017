@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
+import {SliderModule} from 'primeng/primeng';
+
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -30,6 +32,8 @@ import { AlertModule } from 'ngx-bootstrap';
     SelectButtonModule,
     HttpClientModule,
     AlertModule.forRoot(),
+    SliderModule
+    
   ],
   providers: [
     NationalityService
