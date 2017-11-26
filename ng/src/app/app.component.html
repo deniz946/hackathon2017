@@ -65,7 +65,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <br>
-                <button id="searchBtn" class="btn btn-success" (click)="search(natio, type)" [disabled]="(!type && type != null)|| !natio">Buscar</button>
+                <button id="searchBtn" class="btn btn-success" (click)="search(natio, type)" [disabled]="!type || !natio || loading">{{loading === true ? "Buscando..." : "Buscar"}}</button>
             </div>
             <div class="col-md-4"></div>
         </div><br/>
