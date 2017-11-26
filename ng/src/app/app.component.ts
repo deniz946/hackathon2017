@@ -82,20 +82,6 @@ export class AppComponent {
   * Inicializamos los datos del mapa cuando están listos
   */
   onMapReady($event) {
-    //SetCenter here
-
-    //Marcador de prueba
-    let marker = L.marker(this.location, {
-      icon: L.icon({
-        iconSize: [50, 50],
-        iconAnchor: [1, 1],
-        iconUrl: 'assets/marker-image.png',
-        shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
-      })
-    });
-    marker.addTo($event)
-      .bindPopup('Información sobre el lugar')
-    marker.bindTooltip("Nombre de referencia");
     this._map = $event;
   }
 
