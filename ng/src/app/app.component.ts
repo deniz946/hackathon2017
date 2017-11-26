@@ -103,8 +103,7 @@ export class AppComponent
     console.log(type);
     if (nat && type) {
       this.http.get('http://localhost:3000/search', {params: {type: type, nat: nat}}).subscribe(data => {
-        // Read the result field from the JSON response.
-        console.log(data);
+        this.n_results = data.results.length;
       });
     }
   }
