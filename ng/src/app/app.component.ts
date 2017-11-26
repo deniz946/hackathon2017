@@ -92,7 +92,7 @@ export class AppComponent {
     console.log(nat);
     console.log(type);
     if (nat && type) {
-      this.http.get('http://localhost:3000/search', { params: { type: type, nat: nat } }).subscribe(data => {
+      this.http.get('http://localhost:3000/search', { params: { type: type, nat: nat } }).subscribe((data:any) => {
         this.n_results = data.results.length;
         data.results.forEach(item => {
           this.removeMarkers();
