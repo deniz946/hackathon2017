@@ -12,21 +12,24 @@
 <div class="" id="mainWrapper">
     <div id="configWrapper">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
             <select [(ngModel)]="select" class="form-control">
                 <option *ngFor="let nat of nationalities; let i = index" [value]="nat.name">
                 {{nat.name}}
                 </option>
             </select>
         </div>
-        <div class="col-md-4"> <!-- percentSlider -->
+        <div class="col-md-3"> <!-- percentSlider -->
             <div id="percentSliderWrapper">
                 <input type="range" min="1" max="100" value="50" class="slider" id="percentSlider">
             </div>
         </div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
             <select id="countrySelect" class="form-control">
                 <option selected>Categorías</option>
                 <option value="rest">Restaurante</option>
@@ -34,17 +37,20 @@
                 <option value="pub">Pub</option>
             </select>
         </div>
-        <div class="col-md-4"> <!-- ageSlider -->
+        <div class="col-md-3"> <!-- ageSlider -->
             <div id="ageSliderWrapper">
                 <input type="range" min="1" max="100" value="50" class="slider" id="ageSlider">
             </div>
         </div>
+        <div class="col-md-3"></div>
     </div>
      <div class="row">
+        <div class="col-md-4"></div>
       <div class="col-md-4">
             <br>
             <button id="searchBtn" class="btn btn-success">Buscar</button>            
         </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
     <br><br>

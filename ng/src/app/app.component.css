@@ -4,14 +4,8 @@
 }
 
 #mapWrapper{
-    order: 1px solid rgb(65, 65, 65);
+    border: 1px solid rgb(65, 65, 65);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    display: inline;
-}
-#sidebarWrapper{
-    border: 1px solid black;
-    min-height: 200px;
-    display: inline;
 }
 
 footer{
@@ -38,16 +32,6 @@ footer{
 }
 
 #searchBtn{
-    width: 90%;
+    width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.row{
-    text-align: center;
-    margin: auto;
-}
-
-.col-md-4{
-   
-    border: 1px solid black;
 }
