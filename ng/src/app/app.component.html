@@ -72,7 +72,9 @@
         <div class="row" *ngIf="isNResultsVisible()">
             <div class="col-md-4"></div>
             <div class="col-md-4 text-center">
-                <small>({{n_results}})</small>
+                <alert type="info">
+                    Se han encontrado {{n_results}} resultado/s!
+                </alert>
             </div>
             <div class="col-md-4"></div>
         </div>
