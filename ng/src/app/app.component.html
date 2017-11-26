@@ -1,18 +1,16 @@
 <header>
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Nazona</a>
-      </div>
-      <!--<ul class="nav navbar-nav navbar-right">
+    <nav class="navbar">
+        <div class="navbar-header">
+        <img class="navbar-brand" src="assets/logo.png"><img>
+        </div>
+        <!--<ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>-->
-    </div>
+        </ul>-->
   </nav>
 </header>
 <div class="" id="mainWrapper">
-    <div class="row text-center">
+    <div id="configWrapper" class="row text-center">
         <div class="col-md-4">
             <select id="countrySelect" class="custom-select">
                     <option selected>Nacionalidades</option>
@@ -41,7 +39,9 @@
     <div class="container" id="mapWrapper">
         <div style="height: 500px;"
             leaflet 
-            [leafletOptions]="options">
+            [leafletOptions]="options"
+            [leafletLayers]="layers"
+            (leafletMapReady)="onMapReady($event)">
         </div>
     </div>
 </div>

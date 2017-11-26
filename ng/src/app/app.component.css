@@ -5,3 +5,26 @@
 footer{
     padding: 25px;
 }
+
+.navbar{
+    background-color:#252525;
+    margin:auto;
+}
+.navbar-header{
+    width: 100%;
+    float: none;
+    text-align: center;
+}
+.navbar-brand{
+    padding: 0px;
+    float: none;
+    opacity: 80%;
+}
+
+#configWrapper{
+    padding: 15px;
+}
+
+.row{
+    margin-right: 0px;
+}
